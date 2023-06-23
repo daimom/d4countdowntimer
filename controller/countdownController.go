@@ -44,7 +44,7 @@ func CheckTimer(w http.ResponseWriter, req *http.Request) {
 	fmt.Println(req.URL.RawQuery)
 
 	queryParams := req.URL.Query()
-	// queryParams := req.URL.Query()
+	fmt.Println(req.RequestURI)
 	d4event := make(map[string]string)
 	d4event["boss"], _ = url.QueryUnescape(queryParams.Get("boss"))
 	d4event["unixtime"] = queryParams.Get("unixtime")
@@ -62,7 +62,7 @@ func CheckTimer(w http.ResponseWriter, req *http.Request) {
 	}
 	t := time.Unix(unixtime, 0)
 	boss_time := t.In(location).Format("2006-01-02 15:04:05")
-	fmt.Println("boss:" + d4event["boss"] + ",time:" + boss_time)
+	fmt.Println("(" + time.Now().Format("2006-01-02 15:04:05") + ")boss:" + d4event["boss"] + ",time:" + boss_time)
 
 	// lineJob := Job{
 	// 	t:	t,
@@ -78,7 +78,7 @@ func CheckTimer(w http.ResponseWriter, req *http.Request) {
 		// fmt.Println("now :" + now.Format("2006-01-02 15:04:05"))
 		// fmt.Println("boss time:" + boss_time)
 
-		firstStopTime := t.Add(-30 * time.Hour)
+		firstStopTime := t.Add(-30 * time.Minute)
 
 		//stopTime := time.Date(2023, 6, 21, 16, 48, 0, 0, time.Local)
 		msg := "距離世界王" + d4event["boss"] + " 出現時間，" + boss_time + "，還有"
@@ -88,8 +88,8 @@ func CheckTimer(w http.ResponseWriter, req *http.Request) {
 			lineNotify(msg + strconv.FormatFloat(subMin.Minutes(), 'f', 0, 64) + "分鐘")
 
 			countdownMin := int(subMin.Minutes())
-			switch {
-			case countdownMin%10 == 0, countdownMin == 3, countdownMin == 1:
+			switch countdownMin {
+			case 30, 15, 5, 3:
 				//fmt.Println("in")
 				lineNotify(msg + strconv.FormatFloat(subMin.Minutes(), 'f', 0, 64) + "分鐘")
 			default:
