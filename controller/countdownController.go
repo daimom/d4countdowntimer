@@ -78,14 +78,14 @@ func CheckTimer(w http.ResponseWriter, req *http.Request) {
 		// fmt.Println("now :" + now.Format("2006-01-02 15:04:05"))
 		// fmt.Println("boss time:" + boss_time)
 
-		firstStopTime := t.Add(-30 * time.Minute)
+		firstStopTime := t.Add(-35 * time.Minute)
 
 		//stopTime := time.Date(2023, 6, 21, 16, 48, 0, 0, time.Local)
 		msg := "距離世界王" + d4event["boss"] + " 出現時間，" + boss_time + "，還有"
 		if now.After(firstStopTime) {
 
 			subMin := t.Sub(now)
-			lineNotify(msg + strconv.FormatFloat(subMin.Minutes(), 'f', 0, 64) + "分鐘")
+			// lineNotify(msg + strconv.FormatFloat(subMin.Minutes(), 'f', 0, 64) + "分鐘")
 
 			countdownMin := int(subMin.Minutes())
 			switch countdownMin {
