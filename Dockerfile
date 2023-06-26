@@ -14,6 +14,7 @@ FROM alpine
 
 WORKDIR /app
 RUN apk add tzdata
+COPY appsetting.json .
 COPY --from=build-env  go/src/main /app/
 #APM Test End
 

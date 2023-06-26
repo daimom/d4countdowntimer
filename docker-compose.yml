@@ -2,7 +2,7 @@ version: '3'
 services:
   scrapyd:
     container_name: timer
-    image: countdowntimer:v0.3
+    image: countdowntimer:v0.8
     restart: unless-stopped
     networks:
       - scrapy_net  

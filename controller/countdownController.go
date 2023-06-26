@@ -96,13 +96,13 @@ func CheckTimer(w http.ResponseWriter, req *http.Request) {
 			switch countdownMin {
 			case 30, 15, 5, 3:
 				//fmt.Println("in")
-				lineTokens := viper.GetStringMapStringSlice("Line.Token")
-				for _, token := range lineTokens["Token"] {
+				lineTokens := viper.GetStringSlice("Line.Token")
+				for _, token := range lineTokens {
 					lineNotify(msg+strconv.FormatFloat(subMin.Minutes(), 'f', 0, 64)+"分鐘", token)
 				}
 
 			default:
-				fmt.Println(subMin)
+				// fmt.Println(subMin)
 			}
 		}
 		if now.After(t) {
