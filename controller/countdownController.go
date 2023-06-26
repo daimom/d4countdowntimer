@@ -87,8 +87,12 @@ func CheckTimer(w http.ResponseWriter, req *http.Request) {
 
 			subMin := t.Sub(now)
 			// lineNotify(msg + strconv.FormatFloat(subMin.Minutes(), 'f', 0, 64) + "分鐘")
-
-			countdownMin := int(subMin.Minutes())
+			// fmt.Println(subMin.Minutes())
+			// fmt.Println(subMin.Round(time.Minute))
+			// fmt.Println(int(subMin.Round(time.Minute).Minutes()))
+			// fmt.Println(int(subMin.Minutes()))
+			// countdownMin := int(subMin.Minutes())
+			countdownMin := int(subMin.Round(time.Minute).Minutes())
 			switch countdownMin {
 			case 30, 15, 5, 3:
 				//fmt.Println("in")
@@ -98,7 +102,7 @@ func CheckTimer(w http.ResponseWriter, req *http.Request) {
 				}
 
 			default:
-				//fmt.Println(subMin)
+				fmt.Println(subMin)
 			}
 		}
 		if now.After(t) {
