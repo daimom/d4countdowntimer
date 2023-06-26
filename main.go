@@ -22,13 +22,14 @@ func helloHandler(w http.ResponseWriter, req *http.Request) {
 }
 
 func main() {
-	viper.SetConfigName("appsettings")
+	viper.SetConfigName("appsetting")
 	viper.AddConfigPath(".")
 
 	if err := viper.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
 			// Config file not found; ignore error if desired
-			panic(fmt.Errorf("Fatal error config file: %s \n", err))
+			panic(fmt.Errorf("fatal error config file: %s  ", err))
+
 		} else {
 			// Config file was found but another error was produced
 		}

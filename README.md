@@ -7,17 +7,23 @@
 
 ## 安裝說明
 
-請先建立 appsetting.json
+請先建立 appsetting.json , 
+- Token 為倒數計時通知用。
+- noneScrapyToken 為第一次通知世界王出現時間用
 
 ```json
 {
     "Line":{
         "Token":[ 
             "<token>",
+            "<token>",
+            "<token>"
+        ],
+        "noneScrapyToken":[ 
+            "<token>",
             "<token>"
         ]
     }
-    
 }
 ```
 
@@ -28,6 +34,9 @@
 設定了API接入點，
 呼叫 /line/boss?boss=XXX&unixtime=1687368758，
 
-會開始倒數30分時，發line notify ，
+> XXX 為url encode的字串
+> unixtime 為unix時間
 
-需到 controller/countdownController.go 的 31行，修改 line notify token
+會開始倒數30分時，發line notify 
+
+
