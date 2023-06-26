@@ -63,14 +63,11 @@ func CheckTimer(w http.ResponseWriter, req *http.Request) {
 	t := time.Unix(unixtime, 0)
 	boss_time := t.In(location).Format("2006-01-02 15:04:05")
 	fmt.Println("(" + time.Now().Format("2006-01-02 15:04:05") + ")boss:" + d4event["boss"] + ",time:" + boss_time)
-<<<<<<< HEAD
-=======
 
 	lineTokens := viper.GetStringSlice("Line.noneScrapyToken")
 	for _, token := range lineTokens {
 		lineNotify("世界王:"+d4event["boss"]+" 出現時間，"+boss_time, token)
 	}
->>>>>>> 0b0c3f6c0ea78ad1c25bdc3cb41f7b565b508f99
 
 	c := cron.New()
 
@@ -90,17 +87,12 @@ func CheckTimer(w http.ResponseWriter, req *http.Request) {
 
 			subMin := t.Sub(now)
 			// lineNotify(msg + strconv.FormatFloat(subMin.Minutes(), 'f', 0, 64) + "分鐘")
-<<<<<<< HEAD
-
-			countdownMin := int(subMin.Minutes())
-=======
 			// fmt.Println(subMin.Minutes())
 			// fmt.Println(subMin.Round(time.Minute))
 			// fmt.Println(int(subMin.Round(time.Minute).Minutes()))
 			// fmt.Println(int(subMin.Minutes()))
 			// countdownMin := int(subMin.Minutes())
 			countdownMin := int(subMin.Round(time.Minute).Minutes())
->>>>>>> 0b0c3f6c0ea78ad1c25bdc3cb41f7b565b508f99
 			switch countdownMin {
 			case 30, 15, 5, 3:
 				//fmt.Println("in")
